@@ -13,6 +13,7 @@ import SignUp from "./screens/SignUp";
 import Login from './screens/Login';
 import Home from './screens/Home';
 import Loader from './components/Loader';
+import CryptoList from './screens/CryptoList';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,7 @@ const Main = ({route}) => {
                     <Stack.Screen name="Signup" component={SignUp} />
                     <Stack.Screen name="Login" component={Login} />
                     <Stack.Screen name="Home" component={Home} />
+                    <Stack.Screen name="CryptoList" component={CryptoList} />
                 </Stack.Navigator>
 
                 {isAuthenticated}

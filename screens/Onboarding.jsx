@@ -35,7 +35,9 @@ const Onboarding = () => {
                         </Button>
                     </HStack>
 
-                    <Button size="sm" variant="link" colorScheme="indigo">
+                    <Button 
+                    onPress={() => navigation.navigate("CryptoList")}
+                    size="sm" variant="link" colorScheme="indigo">
                         Skip
                     </Button>
                 </VStack>
