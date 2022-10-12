@@ -17,8 +17,10 @@ import {
 } from "native-base";
 import { StyleSheet} from "react-native";
 
+const axios = require("axios");
+
 const CryptoList = () => {
-  const [isLoading, setLoading] = useState(true);
+  // const [isLoading, setLoading] = useState(true);
 
   const [data, setData] = useState([]);
 
@@ -37,20 +39,48 @@ const CryptoList = () => {
     //create string to use on fetch with the coins we will use on our project
     const symbolsString = `symbols=[${symbols.map(symbol => `"${symbol}"`)}]`;
 
-  useEffect(() => {
-    fetch(`https://api.binance.com/api/v3/ticker/24hr?${symbolsString}`)
-      .then((response) => response.json())
-      .then((json) => setData(json))
-      .catch((error) => console.error(error))
-      .finally(() => setLoading(false));
+  useEffect(function loadCoins() {
+    axios.get(`https://api.binance.com/api/v3/ticker/24hr?${symbolsString}`)
+    .then(result => {
+      setData(result.data)
+    })
+    .catch((error) => console.error(error))
+    // fetch(`https://api.binance.com/api/v3/ticker/24hr?${symbolsString}`)
+    //   .then((response) => response.json())
+    //   .then((json) => setData(json))
+    //   .catch((error) => console.error(error))
+    //   .finally(() => setLoading(false));
   }, []);
+
+  const handleAlphabeticalOrder = () => {
+    data.sort((a, b) => {
+      const symbolA = a.symbol;
+      const symbolB = b.symbol;
+
+      if(symbolA<symbolB){
+        return -1;
+      }
+
+      if (symbolA>symbolB){
+        return 1;
+      }
+
+      return 0;
+    });
+    console.log(data)
+  }
+
+  const handle24Sort = () => {
+    data.sort((a, b) => a.priceChangePercent - b.priceChangePercent);
+    console.log(data)
+  }
 
   return(
     <>
       <ScrollView style={styles.background}>
         
         <HStack style={styles.column}>
-          <Button style={styles.background}>
+          <Button style={styles.background} onPress={handleAlphabeticalOrder}>
             <Text style={styles.text}>Pair</Text>
             <Text style={styles.text}>USDT</Text>
           </Button>
@@ -60,7 +90,7 @@ const CryptoList = () => {
             <Text style={styles.text}>price</Text>
           </Button>
 
-          <Button style={styles.background}>
+          <Button style={styles.background} onPress={handle24Sort}>
             <Text style={styles.text}>24H</Text>
             <Text style={styles.text}>Change</Text>
           </Button>
