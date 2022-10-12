@@ -8,6 +8,7 @@ import {
     Divider,
     Icon,
     ScrollView,
+    Button,
     NativeBaseProvider,
     Heading,
     Stack,
@@ -48,12 +49,31 @@ const CryptoList = () => {
     <>
       <ScrollView style={styles.background}>
         
-        {data.map((coin) =>
         <HStack style={styles.column}>
-        <Text style={styles.text}>{coin.symbol} </Text>
-        <Text style={styles.text}>{coin.lastPrice} </Text>
-        <Text style={[styles.text, styles.percentage, coin.priceChangePercent>=0 ? styles.percentagePositive : styles.percentageNegative]}>{Number.parseFloat(coin.priceChangePercent).toFixed(2)} %</Text>
-        </HStack>        
+          <Button style={styles.background}>
+            <Text style={styles.text}>Pair</Text>
+            <Text style={styles.text}>USDT</Text>
+          </Button>
+
+          <Button style={styles.background}>
+            <Text style={styles.text}>Last</Text>
+            <Text style={styles.text}>price</Text>
+          </Button>
+
+          <Button style={styles.background}>
+            <Text style={styles.text}>24H</Text>
+            <Text style={styles.text}>Change</Text>
+          </Button>
+        </HStack>
+        
+        <Divider />
+        
+        {data.map((coin, index) =>
+          <HStack style={[styles.column, styles.tableLine]} key={index}>
+            <Text style={styles.text}>{coin.symbol} </Text>
+            <Text style={styles.text}>{coin.lastPrice} </Text>
+            <Text style={[styles.text, styles.percentage, coin.priceChangePercent>=0 ? styles.percentagePositive : styles.percentageNegative]}>{Number.parseFloat(coin.priceChangePercent).toFixed(2)} %</Text>
+          </HStack>        
         )}
       
       </ScrollView>
@@ -64,20 +84,27 @@ const CryptoList = () => {
 const styles = StyleSheet.create({
   background: {
     backgroundColor: '#221A32',
-  },  
+  }, 
 
   column: {
-    backgroundColor: 'rgba(204, 204, 204, .1)',
-    
     justifyContent: 'space-between',
     marginBottom: 5,
     marginTop: 5,
+    textAlign: 'center'
+  },
+
+  tableLine: {
+    backgroundColor: 'rgba(204, 204, 204, .1)',
     padding: 15,
     borderRadius: 5
   },
 
   text:{
     color: '#fff'
+  },
+
+  button: {
+    justifyContent: 'center'
   },
 
   percentage: {
@@ -88,7 +115,7 @@ const styles = StyleSheet.create({
   },
 
   percentagePositive: {
-    backgoundColor: '#31c451',
+    backgroundColor: '#31c451',
   },
 
   percentageNegative: {
