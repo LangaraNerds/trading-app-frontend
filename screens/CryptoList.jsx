@@ -40,32 +40,38 @@ const CryptoList = () => {
     const symbolsString = `symbols=[${symbols.map(symbol => `"${symbol}"`)}]`;
 
   useEffect(function loadCoins() {
-    axios.get(`https://api.binance.com/api/v3/ticker/24hr?${symbolsString}`)
-    .then(result => {
-      setData(result.data)
-    })
-    .catch((error) => console.error(error))
-    // fetch(`https://api.binance.com/api/v3/ticker/24hr?${symbolsString}`)
-    //   .then((response) => response.json())
-    //   .then((json) => setData(json))
-    //   .catch((error) => console.error(error))
-    //   .finally(() => setLoading(false));
+    const reload = () =>{
+      axios.get(`https://api.binance.com/api/v3/ticker/24hr?${symbolsString}`)
+      .then(result => {
+        setData(result.data)
+      })
+      .catch((error) => console.error(error))
+    }
+
+    let reloadTimer = setInterval(reload, 5000)
+    reload()
+
+    return function stopReloading(){
+      clearInterval(reloadTimer)
+    }
   }, []);
 
   const handleAlphabeticalOrder = () => {
     data.sort((a, b) => {
-      const symbolA = a.symbol;
-      const symbolB = b.symbol;
+      return a.symbol.localeCompare(b.symbol)
+      // const symbolA = a.symbol;
+      // const symbolB = b.symbol;
 
-      if(symbolA<symbolB){
-        return -1;
-      }
 
-      if (symbolA>symbolB){
-        return 1;
-      }
+      // if(symbolA<symbolB){
+      //   return -1;
+      // }
 
-      return 0;
+      // if (symbolA>symbolB){
+      //   return 1;
+      // }
+
+      // return 0;
     });
     console.log(data)
   }
