@@ -125,18 +125,20 @@ const ChartScreen = ({ navigation }) => {
             {loading ? (<Text>Loading ...</Text>) : (
               <>
               <Box width={'50%'}>
+                <Text>Bids</Text>
               {dataBids.map((bids)=>(
                   <HStack justifyContent={'space-between'}>
-                  <Text fontSize={"sm"} color="#31c451" ml={2}>{parseFloat(bids[0]).toFixed(4)}</Text>
+                  <Text fontSize={"sm"} color="#31c451" ml={2}>{parseFloat(bids[0]).toFixed(3)}</Text>
                   <Text fontSize={"sm"} color="#31c451">{parseFloat(bids[1]).toFixed(4)}</Text>
                   </HStack>
               ))}
               </Box>
               <Box width={'50%'}>
+              <Text>Asks</Text>
               {dataAsks.map((asks)=>(
                   <HStack justifyContent={'space-between'}>
-                  <Text fontSize={"sm"} color="#FF6666">{parseFloat(asks[0]).toFixed(4)}</Text>
-                  <Text textAlign={'right'} mr={2} color="#FF6666">{parseFloat(asks[1]).toFixed(4)}</Text>
+                  <Text fontSize={"sm"} color="#FF6666">{parseFloat(asks[1]).toFixed(3)}</Text>
+                  <Text textAlign={'right'} mr={2} color="#FF6666">{parseFloat(asks[0]).toFixed(4)}</Text>
                   </HStack>
               ))}
               </Box>
