@@ -1,37 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Center, Button, AlertDialog, Text, Image, VStack } from "native-base";
-import axios from "axios";
-// import ResourcesList from "../resources.json";
 import StaticResource from '../utils/resources.json'
 
 const AlertDialogComponent = ({ alert, setAlert, navigation }) => {
-    // const [isOpen, setIsOpen] = React.useState(false);
     const staticData = StaticResource[0];
 
     const onClose = () => setAlert(false);
     const cancelRef = React.useRef(null);
-    // const [data, setData] = useState([]);
-
-    // const apiKey= '1a01a2c1e3e54c10b6e7cfca9c84d7cd';
-
-    // useEffect(() => {
-    //     getArticle()
-    // }, [])
-
-    // async function getArticle(){
-    //     try {
-    //         const response = await axios.get(`https://newsapi.org/v2/top-headlines?q=crypto&pageSize=1&apiKey=${apiKey}`);
-
-    //         setData(response.data.articles);
-    //         console.log(data);
-
-    //     }catch (error) {
-    //         console.log(error)
-    //       }
-    // }
+   
     const viewHandle = () => {
         onClose();
-        // navigation.navigate('SampleResource', { article: staticData })
         navigation.navigate('Resources', {
             screen: 'SampleResource',
             initial: false,
@@ -74,7 +52,6 @@ const AlertDialogComponent = ({ alert, setAlert, navigation }) => {
                             </Button>
                         </VStack>
                     </AlertDialog.Body>
-                    {/* </AlertDialog.Footer> */}
                 </AlertDialog.Content>
             </AlertDialog>
         </Center>
