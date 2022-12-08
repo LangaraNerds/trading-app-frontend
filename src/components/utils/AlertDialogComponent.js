@@ -54,7 +54,7 @@ const AlertDialogComponent = ({ alert, setAlert, navigation }) => {
 
     return (
         <Center>
-            <AlertDialog isOpen={true} w={'100%'} >
+            <AlertDialog isOpen={alert} w={'100%'} >
                 <AlertDialog.Content backgroundColor={'secondary.white'}>
                     <AlertDialog.Header backgroundColor={'secondary.white'}>
                         <Text color={'supporting.darkGreen'} fontWeight={'bold'}>Order Sucessfull</Text>
