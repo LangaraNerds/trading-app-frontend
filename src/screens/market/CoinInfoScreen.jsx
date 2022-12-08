@@ -10,9 +10,12 @@ import { StyleSheet } from "react-native";
 
 const axios = require("axios");
 
-const CoinInfoScreen = () => {
+const CoinInfoScreen = ({navigation, route}) => {
+
+    const ticker = route.params;
+
     const [coin, setCoin] = useState()
-    const coinSymbol = 'ETH';
+    const coinSymbol = ticker.ticker.slice(0, -4);
 
     const coinInfo = {
         BTC: {
@@ -92,7 +95,7 @@ const CoinInfoScreen = () => {
                 }
             })
             setCoin(response.data.data[coinSymbol][0])
-            console.log(coin)
+
 
         } catch (error) {
             console.log(error)
